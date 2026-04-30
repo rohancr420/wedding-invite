@@ -1,0 +1,282 @@
+:root {
+    --primary-maroon: #2d070a;
+    --primary-green: #072a1e;
+    --accent-gold: #b38b59;
+    --light-beige: #d8c3a5;
+    --dark-text: #2a1f1b;
+    --light-text: #f8f1e6;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Lora', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: var(--font-body);
+    background-color: #111;
+    color: var(--light-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: var(--accent-gold);
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+}
+
+/* Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Envelope Overlay */
+.envelope-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-maroon);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b38b59' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.envelope-overlay.open {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.1);
+}
+
+.envelope-content {
+    text-align: center;
+    border: 2px solid var(--accent-gold);
+    padding: 3rem;
+    background: rgba(45, 7, 10, 0.9);
+}
+
+.envelope-names {
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.open-btn {
+    margin-top: 2rem;
+    background: transparent;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 10px 30px;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+.open-btn:hover {
+    background: var(--accent-gold);
+    color: var(--primary-maroon);
+}
+
+/* Music Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent-gold);
+    color: var(--primary-maroon);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Layout */
+.scroll-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--primary-maroon);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    position: relative;
+    /* remove gap between images */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Image Sections */
+.image-section {
+    position: relative;
+    width: 100%;
+    margin-bottom: -5px; /* helps hide any subpixel gaps between images */
+}
+
+.full-width-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Overlay Links (Invisible clickable areas) */
+.overlay-link {
+    position: absolute;
+    display: block;
+    z-index: 10;
+}
+
+/* Approximate link positioning based on image composition */
+
+/* Wedding image: RSVP is near the bottom */
+.wedding-rsvp-link {
+    bottom: 5%;
+    left: 10%;
+    width: 80%;
+    height: 8%;
+}
+
+/* Mehendi image: RSVP is above the palanquin, roughly bottom 35-45% */
+.mehendi-rsvp-link {
+    bottom: 35%;
+    left: 10%;
+    width: 80%;
+    height: 8%;
+}
+
+/* Details image: Top location is around 35%, bottom location is around 65% */
+.wedding-location-link {
+    top: 35%;
+    left: 10%;
+    width: 80%;
+    height: 15%;
+}
+
+.mehendi-location-link {
+    top: 60%;
+    left: 10%;
+    width: 80%;
+    height: 15%;
+}
+
+/* RSVP Form Section */
+.rsvp-section {
+    background-color: var(--light-beige);
+    color: var(--dark-text);
+    padding: 4rem 2rem;
+}
+
+.rsvp-section .section-title {
+    color: var(--primary-maroon);
+    text-align: center;
+}
+
+.rsvp-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.rsvp-container p {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: #554;
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--primary-maroon);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-bottom: 2px solid var(--accent-gold);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--dark-text);
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-bottom-color: var(--primary-maroon);
+}
+
+.submit-btn {
+    margin-top: 1rem;
+    background: var(--primary-maroon);
+    color: var(--light-text);
+    border: 1px solid var(--accent-gold);
+    padding: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+    background: var(--accent-gold);
+    color: var(--primary-maroon);
+}
+
+.success-message {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(7, 42, 30, 0.1);
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+    text-align: center;
+    font-style: italic;
+}

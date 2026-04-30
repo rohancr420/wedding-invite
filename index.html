@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sreekrishnan & Dr. Rhea | Wedding Invitation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://db.onlinewebfonts.com/c/4fb4d0da1bed256241a7c41788e5d62e?family=Burgues+Script"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Opening Animation Overlay -->
+    <div id="envelopeOverlay" class="envelope-overlay">
+        <div class="envelope-content">
+            <h2 class="envelope-names">Sreekrishnan & Rhea</h2>
+            <p></p>
+            <button id="openInviteBtn" class="open-btn">Open Invitation</button>
+        </div>
+    </div>
+
+    <!-- Background Music Toggle -->
+    <button id="musicToggle" class="music-btn" aria-label="Toggle Music" style="display: none;">
+        <svg id="musicOn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            style="display: none;">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+        <svg id="musicOff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 9h6"></path>
+            <path d="M19 6v6"></path>
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+        </svg>
+    </button>
+
+    <audio id="bgMusic" loop>
+        <source
+            src="https://cdn.pixabay.com/download/audio/2022/11/06/audio_40df0abfce.mp3?filename=traditional-indian-wedding-music-124458.mp3"
+            type="audio/mpeg">
+    </audio>
+
+    <!-- Main Container -->
+    <div class="scroll-container" style="display: none;" id="mainContent">
+
+        <!-- Wedding Section -->
+        <section class="image-section animate-on-scroll">
+            <img src="assets/wedding_full.png" alt="Wedding Invitation" class="full-width-img">
+            <a href="#rsvp" class="overlay-link wedding-rsvp-link" aria-label="Tap here to RSVP"></a>
+        </section>
+
+        <!-- Mehendi Section -->
+        <section class="image-section animate-on-scroll">
+            <img src="assets/mehendi_full.png" alt="Mehendi Details" class="full-width-img">
+            <a href="#rsvp" class="overlay-link mehendi-rsvp-link" aria-label="Tap here to RSVP"></a>
+        </section>
+
+        <!-- Details Section -->
+        <section class="image-section animate-on-scroll">
+            <img src="assets/details_full.png" alt="Location Details" class="full-width-img">
+            <a href="https://maps.google.com/?q=Nandanam+Auditorium,+Thrissur" target="_blank" class="overlay-link wedding-location-link" aria-label="Tap here for the wedding location"></a>
+            <a href="https://maps.google.com/?q=The+Leaf+Resort,+Poomala" target="_blank" class="overlay-link mehendi-location-link" aria-label="Tap here for the mehendi location"></a>
+        </section>
+
+        <!-- RSVP Section -->
+        <section id="rsvp" class="section rsvp-section animate-on-scroll">
+            <div class="rsvp-container">
+                <h2 class="section-title">RSVP</h2>
+                <p>We kindly request your response</p>
+                <form id="rsvpForm" class="rsvp-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <input type="number" id="guests" min="1" max="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">Attending</label>
+                        <select id="attendance" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="yes_both">Yes, Both Events</option>
+                            <option value="yes_wedding">Yes, Wedding Only</option>
+                            <option value="yes_mehendi">Yes, Mehendi Only</option>
+                            <option value="no">Regretfully Decline</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Send RSVP</button>
+                </form>
+                <div id="rsvpSuccess" class="success-message" style="display: none;">
+                    Thank you! Your RSVP has been received.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
