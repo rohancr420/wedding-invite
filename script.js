@@ -80,28 +80,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. RSVP Form Submission (Mock with Local Storage)
+    // 5. RSVP Form Submission (Google Form Backend)
     const rsvpForm = document.getElementById('rsvpForm');
     const rsvpSuccess = document.getElementById('rsvpSuccess');
+    const submitBtn = rsvpForm ? rsvpForm.querySelector('button[type="submit"]') : null;
 
-    if(rsvpForm) {
+    if (rsvpForm) {
         rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            // Disable button to prevent double submission
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+            }
+
             // Collect data
             const name = document.getElementById('name').value;
-            const attendance = document.getElementById('attendance').value;
             const guests = document.getElementById('guests').value;
+            const rawAttendance = document.getElementById('attendance').value;
 
-            console.log('RSVP Submitted:', { name, attendance, guests });
+            // Map attendance value to exact text expected by Google Form
+            const attendanceMap = {
+                'yes_both': 'Yes, Both Events',
+                'yes_wedding': 'Yes, Wedding Only',
+                'yes_mehendi': 'Yes, Mehendi Only',
+                'no': 'Regretfully Declines'
+            };
+            const attendance = attendanceMap[rawAttendance] || rawAttendance;
 
-            // Show success message and hide form
-            rsvpForm.style.display = 'none';
-            rsvpSuccess.style.display = 'block';
-            
-            // Save to localStorage
-            localStorage.setItem('rsvp_status', 'submitted');
-            localStorage.setItem('rsvp_name', name);
+            // Google Form IDs
+            const formActionUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdJ0RW5e1PHSVHgT_3Hrk1tbynkCGRBInycDQB2Zw2h0Vk2gA/formResponse';
+            const nameEntry = 'entry.2133080667';
+            const guestsEntry = 'entry.2012708771';
+            const attendanceEntry = 'entry.927970149';
+
+            // Create form data
+            const formData = new URLSearchParams();
+            formData.append(nameEntry, name);
+            formData.append(guestsEntry, guests);
+            formData.append(attendanceEntry, attendance);
+
+            // Send to Google Forms
+            fetch(formActionUrl, {
+                method: 'POST',
+                mode: 'no-cors', // Important for Google Forms to bypass CORS
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            .then(() => {
+                // Since mode is no-cors, we won't get a proper success status back, 
+                // but if the promise resolves, it was sent successfully.
+                
+                // Show success message and hide form
+                rsvpForm.style.display = 'none';
+                rsvpSuccess.style.display = 'block';
+                rsvpSuccess.innerHTML = `Thank you, ${name}! Your RSVP has been received.`;
+                
+                // Save to localStorage so they don't see the form again on refresh
+                localStorage.setItem('rsvp_status', 'submitted');
+                localStorage.setItem('rsvp_name', name);
+            })
+            .catch(error => {
+                console.error('RSVP Error:', error);
+                alert('There was a problem sending your RSVP. Please try again.');
+                if(submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send RSVP';
+                }
+            });
         });
     }
 
