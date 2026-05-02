@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show music button
         musicBtn.style.display = 'flex';
         
+        // Trigger glitter effect
+        createGlitter();
+        
         // Auto-play music if possible
         bgMusic.play().then(() => {
             isMusicPlaying = true;
@@ -32,6 +35,40 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'none';
         }, 1000);
     });
+
+    function createGlitter() {
+        const container = document.body;
+        const particleCount = 60;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'glitter-particle';
+            
+            // Random size
+            const size = Math.random() * 3 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            
+            // Random animation delay and duration
+            const duration = Math.random() * 1 + 1;
+            const delay = Math.random() * 0.5;
+            const drift = (Math.random() - 0.5) * 150; 
+            
+            particle.style.setProperty('--tw-translate-x', `${drift}px`);
+            particle.style.animation = `glitter-fall ${duration}s ease-out ${delay}s forwards`;
+            
+            container.appendChild(particle);
+            
+            // Cleanup
+            setTimeout(() => {
+                particle.remove();
+            }, (duration + delay) * 1000);
+        }
+    }
 
     // 2. Music Toggle Logic
     let isMusicPlaying = false;
