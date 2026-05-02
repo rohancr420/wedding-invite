@@ -305,7 +305,7 @@ h3 {
         opacity: 1;
     }
     100% {
-        transform: translate(var(--tw-translate-x, 20px), 100px) rotate(360deg) scale(0);
+        transform: translate(var(--tw-translate-x, 20px), 400px) rotate(360deg) scale(0);
         opacity: 0;
     }
 }

@@ -54,9 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
             particle.style.top = `${Math.random() * 100}vh`;
             
             // Random animation delay and duration
-            const duration = Math.random() * 1 + 1;
+            const duration = Math.random() * 2 + 3; // 3 to 5 seconds
             const delay = Math.random() * 0.5;
-            const drift = (Math.random() - 0.5) * 150; 
+            const drift = (Math.random() - 0.5) * 200; 
             
             particle.style.setProperty('--tw-translate-x', `${drift}px`);
             particle.style.animation = `glitter-fall ${duration}s ease-out ${delay}s forwards`;
